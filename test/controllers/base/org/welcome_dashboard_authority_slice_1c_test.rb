@@ -30,7 +30,7 @@ class Base::Org::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
 
     assert_response :success
     assert_equal "base/org/dashboards/show", inertia_component
-    assert_equal "Dashboard", inertia_props.fetch("title")
+    assert_equal I18n.t("base.shared.dashboard.title", locale: :ja), inertia_props.fetch("title")
     assert_no_match(/id\.umaxica/, response.body)
 
     links =
@@ -48,18 +48,19 @@ class Base::Org::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
 
     assert_includes hrefs, base_org_root_path(ri: "jp")
     assert_includes hrefs, base_org_dashboard_path(ri: "jp")
-    assert_equal base_org_accounts_path(ri: "jp"), labelled.fetch("Account")
-    assert_equal base_org_organizations_path(ri: "jp"), labelled.fetch("Organization")
-    assert_equal base_org_avatar_path(ri: "jp"), labelled.fetch("Avatar")
+    assert_equal base_org_accounts_path(ri: "jp"), labelled.fetch(dashboard_label(:account))
+    assert_equal base_org_organizations_path(ri: "jp"), labelled.fetch(dashboard_label(:organization))
+    assert_equal base_org_avatar_path(ri: "jp"), labelled.fetch(dashboard_label(:avatar))
     assert_includes hrefs, base_org_selector_path(ri: "jp")
     assert_includes hrefs, new_base_org_sign_out_path(ri: "jp")
     assert_includes hrefs, base_org_oidc_authorization_path(ri: "jp", screen_hint: "signin")
     assert_includes hrefs, base_org_oidc_authorization_path(ri: "jp", screen_hint: "signup")
-    assert_includes labelled.keys, "OIDC discovery"
-    assert_includes labelled.keys, "JWKS"
-    assert_includes labelled.keys, "UserInfo"
+    assert_includes labelled.keys, dashboard_label(:oidc_discovery)
+    assert_includes labelled.keys, dashboard_label(:jwks)
+    assert_includes labelled.keys, dashboard_label(:userinfo)
 
-    publishing = inertia_props.fetch("sections").find { |section| section.fetch("heading") == "Publishing" }
+    publishing_heading = I18n.t("base.shared.dashboard.sections.publishing", locale: :ja)
+    publishing = inertia_props.fetch("sections").find { |section| section.fetch("heading") == publishing_heading }
 
     assert publishing
     surfaces = publishing.fetch("groups").map { |group| group.fetch("heading") }
@@ -100,6 +101,11 @@ class Base::Org::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
   end
 
   private
+
+  # Requests use ri=jp, so the dashboard renders its Japanese copy.
+  def dashboard_label(key)
+    I18n.t(key, scope: "base.shared.dashboard.links", locale: :ja)
+  end
 
   def select_token!(surface:, principal:, token:)
     BaseSelectorBootstrapAuthority.call(surface: surface, principal: principal)

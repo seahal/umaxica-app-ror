@@ -32,7 +32,7 @@ class Base::Com::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
 
     assert_response :success
     assert_equal "base/com/dashboards/show", inertia_component
-    assert_equal "Dashboard", inertia_props.fetch("title")
+    assert_equal I18n.t("base.shared.dashboard.title", locale: :ja), inertia_props.fetch("title")
     assert_no_match(/id\.umaxica/, response.body)
 
     links = inertia_props.fetch("sections").flat_map { |section| section.fetch("items") }
@@ -41,15 +41,15 @@ class Base::Com::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
 
     assert_includes hrefs, base_com_root_path(ri: "jp")
     assert_includes hrefs, base_com_dashboard_path(ri: "jp")
-    assert_equal base_com_accounts_path(ri: "jp"), labelled.fetch("Account")
-    assert_equal base_com_organizations_path(ri: "jp"), labelled.fetch("Organization")
+    assert_equal base_com_accounts_path(ri: "jp"), labelled.fetch(dashboard_label(:account))
+    assert_equal base_com_organizations_path(ri: "jp"), labelled.fetch(dashboard_label(:organization))
     assert_includes hrefs, base_com_selector_path(ri: "jp")
     assert_includes hrefs, new_base_com_sign_out_path(ri: "jp")
     assert_includes hrefs, base_com_oidc_authorization_path(ri: "jp", screen_hint: "signin")
     assert_includes hrefs, base_com_oidc_authorization_path(ri: "jp", screen_hint: "signup")
-    assert_includes labelled.keys, "OIDC discovery"
-    assert_includes labelled.keys, "JWKS"
-    assert_includes labelled.keys, "UserInfo"
+    assert_includes labelled.keys, dashboard_label(:oidc_discovery)
+    assert_includes labelled.keys, dashboard_label(:jwks)
+    assert_includes labelled.keys, dashboard_label(:userinfo)
     assert_no_match(%r{//example|umaxica\.example|evil\.example}, response.body)
   end
 
@@ -63,6 +63,11 @@ class Base::Com::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
   end
 
   private
+
+  # Requests use ri=jp, so the dashboard renders its Japanese copy.
+  def dashboard_label(key)
+    I18n.t(key, scope: "base.shared.dashboard.links", locale: :ja)
+  end
 
   def select_token!(surface:, principal:, token:)
     BaseSelectorBootstrapAuthority.call(surface: surface, principal: principal)

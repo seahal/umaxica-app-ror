@@ -32,7 +32,7 @@ class Base::App::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
 
     assert_response :success
     assert_equal "base/app/dashboards/show", inertia_component
-    assert_equal "Dashboard", inertia_props.fetch("title")
+    assert_equal I18n.t("base.shared.dashboard.title", locale: :ja), inertia_props.fetch("title")
 
     links = inertia_props.fetch("sections").flat_map { |section| section.fetch("items") }
     hrefs = links.map { |link| link.fetch("href") }
@@ -40,20 +40,20 @@ class Base::App::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
 
     assert_includes hrefs, base_app_root_path(ri: "jp")
     assert_includes hrefs, base_app_dashboard_path(ri: "jp")
-    assert_equal base_app_accounts_path(ri: "jp"), labelled.fetch("Account")
-    assert_equal base_app_organizations_path(ri: "jp"), labelled.fetch("Organization")
-    assert_equal base_app_avatars_path(ri: "jp"), labelled.fetch("Avatar")
-    assert_equal base_app_switcher_path(ri: "jp"), labelled.fetch("Switcher")
-    assert_equal base_app_identity_path(ri: "jp"), labelled.fetch("Identity")
+    assert_equal base_app_accounts_path(ri: "jp"), labelled.fetch(dashboard_label(:account))
+    assert_equal base_app_organizations_path(ri: "jp"), labelled.fetch(dashboard_label(:organization))
+    assert_equal base_app_avatars_path(ri: "jp"), labelled.fetch(dashboard_label(:avatar))
+    assert_equal base_app_switcher_path(ri: "jp"), labelled.fetch(dashboard_label(:switcher))
+    assert_equal base_app_identity_path(ri: "jp"), labelled.fetch(dashboard_label(:identity))
     assert_includes hrefs, base_app_selector_path(ri: "jp")
     assert_includes hrefs, new_base_app_sign_out_path(ri: "jp")
     # The dashboard only links to ceremonies; it never posts a logout itself.
     assert_select "form[action^=?]", base_app_oidc_logout_path, count: 0
     assert_includes hrefs, base_app_oidc_authorization_path(ri: "jp", screen_hint: "signin")
     assert_includes hrefs, base_app_oidc_authorization_path(ri: "jp", screen_hint: "signup")
-    assert_includes labelled.keys, "OIDC discovery"
-    assert_includes labelled.keys, "JWKS"
-    assert_includes labelled.keys, "UserInfo"
+    assert_includes labelled.keys, dashboard_label(:oidc_discovery)
+    assert_includes labelled.keys, dashboard_label(:jwks)
+    assert_includes labelled.keys, dashboard_label(:userinfo)
     assert_no_match(%r{//example|umaxica\.example|evil\.example}, response.body)
   end
 
@@ -69,9 +69,9 @@ class Base::App::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
         .to_h { |link| [link.fetch("label"), link.fetch("href")] }
 
     assert_equal base_app_oidc_authorization_path(ri: "jp", screen_hint: "signin"),
-                 labelled.fetch("Authorize (sign in)")
+                 labelled.fetch(dashboard_label(:authorize_sign_in))
     assert_equal base_app_oidc_authorization_path(ri: "jp", screen_hint: "signup"),
-                 labelled.fetch("Authorize (sign up)")
+                 labelled.fetch(dashboard_label(:authorize_sign_up))
   end
 
   test "welcome_requires_authentication" do
@@ -81,6 +81,11 @@ class Base::App::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
   end
 
   private
+
+  # Requests use ri=jp, so the dashboard renders its Japanese copy.
+  def dashboard_label(key)
+    I18n.t(key, scope: "base.shared.dashboard.links", locale: :ja)
+  end
 
   def select_token!(surface:, principal:, token:)
     BaseSelectorBootstrapAuthority.call(surface: surface, principal: principal)
