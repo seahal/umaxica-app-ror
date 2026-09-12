@@ -309,14 +309,14 @@ an explicit preference write path changes them and reissues a token.
 A `/preference/region` write is not a single-field write. It rewrites the region-owned locale
 defaults to the region's values in one transaction and marks each one explicit:
 
-| Region | language | date format         | clock  |
-| ------ | -------- | ------------------- | ------ |
-| `jp`   | `ja`     | `iso` (YYYY-MM-DD)  | 24h    |
-| `us`   | `en`     | `us` (MM/DD/YYYY)   | 12h    |
+| Region | language | date format         | clock  | currency |
+| ------ | -------- | ------------------- | ------ | -------- |
+| `jp`   | `ja`     | `iso` (YYYY-MM-DD)  | 24h    | `jpy`    |
+| `us`   | `en`     | `us` (MM/DD/YYYY)   | 12h    | `usd`    |
 
-The individual language / calendar / clock screens still let a person override any of these
-afterwards; the override is then explicit and survives a later `?ri` change. If any of the four
-child writes fails, the whole change rolls back — a half-applied bundle is never persisted.
+The individual language / calendar / clock / currency screens still let a person override any of
+these afterwards; the override is then explicit and survives a later `?ri` change. If any of the
+five child writes fails, the whole change rolls back — a half-applied bundle is never persisted.
 
 Do not reverse this flow.
 

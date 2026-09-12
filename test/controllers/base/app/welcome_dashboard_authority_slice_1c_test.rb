@@ -45,7 +45,8 @@ class Base::App::WelcomeDashboardAuthoritySlice1CTest < ActionDispatch::Integrat
     assert_equal base_app_avatars_path(ri: "jp"), labelled.fetch(dashboard_label(:avatar))
     assert_equal base_app_switcher_path(ri: "jp"), labelled.fetch(dashboard_label(:switcher))
     assert_equal base_app_identity_path(ri: "jp"), labelled.fetch(dashboard_label(:identity))
-    assert_includes hrefs, base_app_selector_path(ri: "jp")
+    assert_not_includes hrefs, base_app_selector_path(ri: "jp")
+    assert_not labelled.key?(dashboard_label(:selector))
     assert_includes hrefs, new_base_app_sign_out_path(ri: "jp")
     # The dashboard only links to ceremonies; it never posts a logout itself.
     assert_select "form[action^=?]", base_app_oidc_logout_path, count: 0

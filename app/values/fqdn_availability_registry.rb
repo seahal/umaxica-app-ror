@@ -55,9 +55,9 @@ module FqdnAvailabilityRegistry
     guid_service: lambda { |hosts|
       [hosts.guid_service.host, ENV["PRIVATE_GUID_SERVICE_URL"], "guid.umaxica.net", "guid.net.localhost"]
     },
-    side_service: ->(hosts) { [hosts.side_service.host, "side.app.localhost"] },
-    side_corporate: ->(hosts) { [hosts.side_corporate.host, "side.com.localhost"] },
-    side_staff: ->(hosts) { [hosts.side_staff.host, "side.org.localhost"] },
+    side_service: ->(hosts) { [hosts.side_service.host, "wide.app.localhost"] },
+    side_corporate: ->(hosts) { [hosts.side_corporate.host, "wide.com.localhost"] },
+    side_staff: ->(hosts) { [hosts.side_staff.host, "wide.org.localhost"] },
     palm_service: ->(hosts) { [hosts.palm_service.host, "palm.app.localhost"] },
   }.freeze
 

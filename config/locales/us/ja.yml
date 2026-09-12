@@ -1185,6 +1185,11 @@ ja:
       roots:
         message: Thin landing endpoint.
     shared:
+      lobby:
+        title: ロビー
+        heading: ロビー
+        description: 続けるにはサインインしてください。
+        sign_in: サインイン
       dashboard:
         title: ダッシュボード
         description: サインイン済み

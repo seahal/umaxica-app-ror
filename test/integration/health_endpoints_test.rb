@@ -247,7 +247,7 @@ class HealthEndpointsTest < ActionDispatch::IntegrationTest
       profile: Health::Profiles::App,
     },
     {
-      host: ENV.fetch("PUBLIC_SIDE_SERVICE_URL", "side.app.localhost"),
+      host: ENV.fetch("PUBLIC_SIDE_SERVICE_URL", "wide.app.localhost"),
       controller: "side/app/healths",
       liveness_controller: "side/app/health/livenesses",
       readiness_controller: "side/app/health/readinesses",
@@ -256,7 +256,7 @@ class HealthEndpointsTest < ActionDispatch::IntegrationTest
       profile: Health::Profiles::App,
     },
     {
-      host: ENV.fetch("PUBLIC_SIDE_CORPORATE_URL", "side.com.localhost"),
+      host: ENV.fetch("PUBLIC_SIDE_CORPORATE_URL", "wide.com.localhost"),
       controller: "side/com/healths",
       liveness_controller: "side/com/health/livenesses",
       readiness_controller: "side/com/health/readinesses",
@@ -265,7 +265,7 @@ class HealthEndpointsTest < ActionDispatch::IntegrationTest
       profile: Health::Profiles::Com,
     },
     {
-      host: ENV.fetch("PUBLIC_SIDE_STAFF_URL", "side.org.localhost"),
+      host: ENV.fetch("PUBLIC_SIDE_STAFF_URL", "wide.org.localhost"),
       controller: "side/org/healths",
       liveness_controller: "side/org/health/livenesses",
       readiness_controller: "side/org/health/readinesses",

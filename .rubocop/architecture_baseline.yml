@@ -357,8 +357,7 @@ Umaxica/ExplicitMethodVisibility:
   app/controllers/base/app/roots_controller.rb: 1
   app/controllers/base/app/selectors_controller.rb: 2
   app/controllers/base/app/sign/in/limitations_controller.rb: 3
-  app/controllers/base/app/sign_outs/completions_controller.rb: 1
-  app/controllers/base/app/sign_outs_controller.rb: 4
+  app/controllers/base/app/sign_outs_controller.rb: 3
   app/controllers/base/app/sitemaps_controller.rb: 1
   app/controllers/base/app/social/authentication/completions_controller.rb: 1
   app/controllers/base/app/social/authentication/continuations_controller.rb: 1
@@ -417,8 +416,7 @@ Umaxica/ExplicitMethodVisibility:
   app/controllers/base/com/robots_controller.rb: 1
   app/controllers/base/com/roots_controller.rb: 1
   app/controllers/base/com/selectors_controller.rb: 2
-  app/controllers/base/com/sign_outs/completions_controller.rb: 1
-  app/controllers/base/com/sign_outs_controller.rb: 4
+  app/controllers/base/com/sign_outs_controller.rb: 3
   app/controllers/base/com/sitemaps_controller.rb: 1
   app/controllers/base/com/switchers_controller.rb: 2
   app/controllers/base/com/verification/cancellations_controller.rb: 1
@@ -527,8 +525,7 @@ Umaxica/ExplicitMethodVisibility:
   app/controllers/base/org/robots_controller.rb: 1
   app/controllers/base/org/roots_controller.rb: 1
   app/controllers/base/org/selectors_controller.rb: 2
-  app/controllers/base/org/sign_outs/completions_controller.rb: 1
-  app/controllers/base/org/sign_outs_controller.rb: 4
+  app/controllers/base/org/sign_outs_controller.rb: 3
   app/controllers/base/org/sitemaps_controller.rb: 1
   app/controllers/base/org/support/enforcement_cases/appeal_reviews_controller.rb: 1
   app/controllers/base/org/support/enforcement_cases/approvals_controller.rb: 1

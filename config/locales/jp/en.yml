@@ -1411,6 +1411,11 @@ en:
       roots:
         message: Thin landing endpoint.
     shared:
+      lobby:
+        title: Lobby
+        heading: Lobby
+        description: Sign in to continue.
+        sign_in: Sign in
       dashboard:
         title: Dashboard
         description: Signed in

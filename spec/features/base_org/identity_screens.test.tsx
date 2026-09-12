@@ -38,7 +38,6 @@ const { default: SecretCredentialForm } =
 const { default: SelfServiceShell } = await import("@/pages/base/org/accounts/index");
 const { default: WelcomeShow } = await import("@/pages/base/org/welcomes/show");
 const { default: SignOutConfirmation } = await import("@/pages/base/org/sign_outs/edit");
-const { default: SignOutCompletion } = await import("@/pages/base/org/sign_outs/complete");
 const { csrfToken } = await import("@/lib/csrf");
 
 const turnstile = { site_key: "site", mode: "execute" as const, action: null, cdata: null };
@@ -497,26 +496,6 @@ describe("shared self-service screens", () => {
     );
 
     expect(signedOut).not.toContain("<form");
-
-    expect(
-      renderToStaticMarkup(
-        <SignOutCompletion
-          title="You are signed out"
-          description="Access ends soon."
-          home_link={{ label: "Home", href: "/" }}
-        />,
-      ),
-    ).toContain("Access ends soon.");
-
-    expect(
-      renderToStaticMarkup(
-        <SignOutCompletion
-          title="You are signed out"
-          description={null}
-          home_link={{ label: "Home", href: "/" }}
-        />,
-      ),
-    ).toContain("You are signed out");
   });
 });
 

@@ -1499,6 +1499,7 @@ module Preference
         UPDATE_PREFERENCE_LANGUAGE
         UPDATE_PREFERENCE_DATE_FORMAT
         UPDATE_PREFERENCE_TIME_FORMAT
+        UPDATE_PREFERENCE_CURRENCY
       )
 
       assert_nothing_raised do

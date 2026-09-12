@@ -21,6 +21,7 @@ module Security
     DOCUMENT_PATH = Rails.root.join("docs/security/public-entrypoints.md")
     DOCUMENTED_CATEGORY_IDS = %w(
       PUBLIC_ROOTS
+      PUBLIC_LOBBY
       PUBLIC_HEALTH
       PUBLIC_REVISION
       PUBLIC_CSP_REPORTS
@@ -171,6 +172,7 @@ module Security
 
     def documented_public_content?(entry)
       public_root?(entry) ||
+        public_lobby?(entry) ||
         public_health?(entry) ||
         public_revision?(entry) ||
         public_csp_report?(entry) ||
@@ -215,6 +217,11 @@ module Security
     end
 
     def public_root?(entry) = get?(entry) && entry.path == "/"
+
+    def public_lobby?(entry)
+      get?(entry) && entry.path == "/lobby" &&
+        entry.controller_path.match?(%r{\Abase/(app|com|org)/lobbies\z})
+    end
 
     def public_health?(entry)
       get?(entry) && (entry.path.start_with?("/health") || entry.path == "/api/v0/health.json")

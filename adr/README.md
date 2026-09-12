@@ -230,6 +230,9 @@ Sign configuration decisions:
 
 Session and token decisions:
 
+- `adr/base-lobby-unauthenticated-entry.md` — Base anonymous entry is `GET /lobby`, authenticated
+  entry remains `GET /dashboard`, and Base local sign-out is PRG (`303`) onto `/lobby` with the
+  existing `SignOutNotice` marker. Amends `adr/logout-ceremony-boundary.md` for Base only.
 - `adr/acme-session-and-token-authority.md`
 - `adr/social-login-cooldown-and-one-shot-completion.md` — accepted decision that repeated social
   login completion inside the 30-second login cooldown is a valid Acme-side cooldown rejection, and

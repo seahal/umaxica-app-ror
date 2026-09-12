@@ -226,9 +226,12 @@ Rails.application.configure do
     news.com.localhost:3000
     news.org.localhost:3000
     news.app.localhost:3000
-    side.com.localhost:3000
-    side.org.localhost:3000
-    side.app.localhost:3000
+    wide.com.localhost:3000
+    wide.com.localhost:3001
+    wide.org.localhost:3000
+    wide.org.localhost:3001
+    wide.app.localhost:3000
+    wide.app.localhost:3001
     palm.app.localhost:3000
     guid.net.localhost:3000
   )

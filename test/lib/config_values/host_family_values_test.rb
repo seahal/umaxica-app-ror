@@ -22,13 +22,13 @@ class ConfigValuesHostFamilyValuesTest < ActiveSupport::TestCase
     assert_equal "https://jpx.umaxica.com", values.core_corporate.to_s
     assert_equal "https://jpx.umaxica.org", values.core_staff.to_s
 
-    assert_equal "https://www-jp.umaxica.app", values.base_service.to_s
-    assert_equal "https://www-jp.umaxica.com", values.base_corporate.to_s
-    assert_equal "https://www-jp.umaxica.org", values.base_staff.to_s
+    assert_equal "https://www.umaxica.app", values.base_service.to_s
+    assert_equal "https://www.umaxica.com", values.base_corporate.to_s
+    assert_equal "https://www.umaxica.org", values.base_staff.to_s
 
-    assert_equal "https://side-jp.umaxica.app", values.side_service.to_s
-    assert_equal "https://side-jp.umaxica.com", values.side_corporate.to_s
-    assert_equal "https://side-jp.umaxica.org", values.side_staff.to_s
+    assert_equal "https://www-jp.umaxica.app", values.side_service.to_s
+    assert_equal "https://www-jp.umaxica.com", values.side_corporate.to_s
+    assert_equal "https://www-jp.umaxica.org", values.side_staff.to_s
 
     assert_equal "https://palm-jp.umaxica.app", values.palm_service.to_s
     assert_equal "https://palm-jp.umaxica.com", values.palm_corporate.to_s

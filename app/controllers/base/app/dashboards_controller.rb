@@ -36,7 +36,6 @@ module Base
           { label: t("base.shared.dashboard.links.avatar"), href: base_app_avatars_path(ri: params[:ri]) },
           { label: t("base.shared.dashboard.links.switcher"), href: base_app_switcher_path(ri: params[:ri]) },
           { label: t("base.shared.dashboard.links.identity"), href: base_app_identity_path(ri: params[:ri]) },
-          { label: t("base.shared.dashboard.links.selector"), href: base_app_selector_path(ri: params[:ri]) },
           { label: t("base.shared.dashboard.links.logout"), href: new_base_app_sign_out_path(ri: params[:ri]) },
         ]
       end
