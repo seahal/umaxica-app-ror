@@ -27,6 +27,7 @@ module ConfigValues
       :info_service,
       :info_corporate,
       :info_staff,
+      :guid_service,
     ) do
       def acme_origins
         [acme_service, acme_corporate, acme_staff]
@@ -118,13 +119,13 @@ class << ConfigValues::HostFamilyValues
         production: production,
       ),
       base_service: origin(
-        env, base_key(env, "SERVICE"), development_host(production, "www-jp.umaxica.app"), production: production,
+        env, base_key(env, "SERVICE"), development_host(production, "www.umaxica.app"), production: production,
       ),
       base_corporate: origin(
-        env, base_key(env, "CORPORATE"), development_host(production, "www-jp.umaxica.com"), production: production,
+        env, base_key(env, "CORPORATE"), development_host(production, "www.umaxica.com"), production: production,
       ),
       base_staff: origin(
-        env, base_key(env, "STAFF"), development_host(production, "www-jp.umaxica.org"), production: production,
+        env, base_key(env, "STAFF"), development_host(production, "www.umaxica.org"), production: production,
       ),
     }
   end
@@ -132,13 +133,13 @@ class << ConfigValues::HostFamilyValues
   def host_family_secondary_origins(env:, production:)
     {
       side_service: origin(
-        env, side_key(env, "SERVICE"), development_host(production, "side-jp.umaxica.app"), production: production,
+        env, side_key(env, "SERVICE"), development_host(production, "www-jp.umaxica.app"), production: production,
       ),
       side_corporate: origin(
-        env, side_key(env, "CORPORATE"), development_host(production, "side-jp.umaxica.com"), production: production,
+        env, side_key(env, "CORPORATE"), development_host(production, "www-jp.umaxica.com"), production: production,
       ),
       side_staff: origin(
-        env, side_key(env, "STAFF"), development_host(production, "side-jp.umaxica.org"), production: production,
+        env, side_key(env, "STAFF"), development_host(production, "www-jp.umaxica.org"), production: production,
       ),
       palm_service: origin(
         env, "PALM_SERVICE_URL", development_host(production, "palm-jp.umaxica.app"), production: production,
@@ -169,6 +170,9 @@ class << ConfigValues::HostFamilyValues
       info_staff: origin(
         env, "INFO_STAFF_URL", development_host(production, "info.org.localhost"),
         production: production,
+      ),
+      guid_service: origin(
+        env, guid_key(env), development_host(production, "guid.net.localhost"), production: production,
       ),
     }
   end
@@ -221,6 +225,10 @@ class << ConfigValues::HostFamilyValues
     else
       "CORE_#{surface}_URL"
     end
+  end
+
+  def guid_key(env)
+    env.key?("GUID_SERVICE_URL") ? "GUID_SERVICE_URL" : "PUBLIC_GUID_SERVICE_URL"
   end
 
   def origin(env, key, fallback, production:)

@@ -42,7 +42,8 @@ The gates are intentionally independent:
 4. **Podman DNS aliases**: `podman compose config` must show the private aliases on `core`'s
    `frontend` network and no new host port publication. The connector never needs an inbound host
    port and must not be given one; the only publications in the stack are `core`'s loopback-bound
-   `3000`/`3036`. See `docs/operations/development-host-port-exposure.md`.
+   host `3001` to container `3000`, plus `3036` for Vite. See
+   `docs/operations/development-host-port-exposure.md`.
 5. **Workers VPC connector prerequisites**: `cloudflare-tunnel-workers-vpc` is pinned at the
    supported `2026.8.2` release, runs with QUIC, authenticates with its own tunnel token from the
    gitignored repository `.env`, and requires outbound UDP port 7844. Its `/ready` must report four
